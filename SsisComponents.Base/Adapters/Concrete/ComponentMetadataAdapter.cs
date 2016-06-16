@@ -2,11 +2,11 @@
 using System.Linq;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-using SsisComponents.Transformations.Adapters.Abstract;
-using SsisComponents.Transformations.CustomProperties.Abstract;
-using SsisComponents.Transformations.CustomProperties.Factory;
+using SsisComponents.Base.Adapters.Abstract;
+using SsisComponents.Base.CustomProperties.Abstract;
+using SsisComponents.Base.CustomProperties.Factory;
 
-namespace SsisComponents.Transformations.Adapters.Concrete
+namespace SsisComponents.Base.Adapters.Concrete
 {
     public class ComponentMetadataAdapter : IComponentMetadataAdapter
     {
@@ -72,7 +72,7 @@ namespace SsisComponents.Transformations.Adapters.Concrete
                 .InputCollection
                 .Cast<IDTSInput100>()
                 .Single(i => i.InputColumnCollection.Cast<IDTSInputColumn100>()
-                    .Any(c => c.LineageID == inputColumn.LineageID));
+                    .Any(c => c.Name == inputColumn.Name));
 
             return input
                 .InputColumnCollection
@@ -85,7 +85,7 @@ namespace SsisComponents.Transformations.Adapters.Concrete
                 .OutputCollection
                 .Cast<IDTSOutput100>()
                 .Single(o => o.OutputColumnCollection.Cast<IDTSOutputColumn100>()
-                    .Any(c => c.LineageID == outputColumn.LineageID));
+                    .Any(c => c.Name == outputColumn.Name));
 
             return output
                 .OutputColumnCollection
@@ -98,12 +98,6 @@ namespace SsisComponents.Transformations.Adapters.Concrete
                 .OutputCollection[0]
                 .OutputColumnCollection
                 .RemoveObjectByIndex(index);
-        }
-
-        public IDTSInputColumn100 GetInputColumnByLineageId(int lineageID)
-        {
-            return GetInputColumns()
-                .SingleOrDefault(i => i.LineageID == lineageID);
         }
 
         public void CheckAllInputColumns(int inputID, params DataType[] restrictToDataTypes)
@@ -170,6 +164,12 @@ namespace SsisComponents.Transformations.Adapters.Concrete
             var newProperty = output.CustomPropertyCollection.New();
             newProperty.Name = propertyName;
             newProperty.Value = propertyValue;
+        }
+
+        public IDTSInputColumn100 GetInputColumnByName(string columnName)
+        {
+            return GetInputColumns()
+                .SingleOrDefault(c => c.Name.Equals(columnName));
         }
 
         private IDTSInput100 GetInputByInputID(int inputID)

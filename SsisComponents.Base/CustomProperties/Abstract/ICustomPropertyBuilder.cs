@@ -1,6 +1,6 @@
 ﻿using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 
-namespace SsisComponents.Transformations.CustomProperties.Abstract
+namespace SsisComponents.Base.CustomProperties.Abstract
 {
     public interface ICustomPropertyBuilder
     {

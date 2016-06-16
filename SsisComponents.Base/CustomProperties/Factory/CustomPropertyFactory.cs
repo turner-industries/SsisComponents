@@ -1,7 +1,7 @@
 ﻿using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-using SsisComponents.Transformations.CustomProperties.Abstract;
+using SsisComponents.Base.CustomProperties.Abstract;
 
-namespace SsisComponents.Transformations.CustomProperties.Factory
+namespace SsisComponents.Base.CustomProperties.Factory
 {
     public class CustomPropertyFactory
     {
