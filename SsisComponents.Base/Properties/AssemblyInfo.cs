@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SsisComponents.TrimAndUpper")]
+[assembly: AssemblyTitle("SsisComponents.Base")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("SsisComponents.TrimAndUpper")]
+[assembly: AssemblyProduct("SsisComponents.Base")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("78c6d2b9-4ec4-455b-9d12-8298f8e0151a")]
+[assembly: Guid("70c4d9e2-1d7d-476b-ad12-4fb347f1afcb")]
 
 // Version information for an assembly consists of the following four values:
 //
