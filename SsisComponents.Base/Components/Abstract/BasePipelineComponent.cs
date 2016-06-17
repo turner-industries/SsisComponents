@@ -1,9 +1,9 @@
 ﻿using Microsoft.SqlServer.Dts.Pipeline;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
-using SsisComponents.Transformations.Adapters.Abstract;
-using SsisComponents.Transformations.Adapters.Concrete;
+using SsisComponents.Base.Adapters.Abstract;
+using SsisComponents.Base.Adapters.Concrete;
 
-namespace SsisComponents.Transformations.Components.Abstract
+namespace SsisComponents.Base.Components.Abstract
 {
     public class BasePipelineComponent : PipelineComponent
     {

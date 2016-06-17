@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-using SsisComponents.Transformations.CustomProperties.Abstract;
+using SsisComponents.Base.CustomProperties.Abstract;
 
-namespace SsisComponents.Transformations.Adapters.Abstract
+namespace SsisComponents.Base.Adapters.Abstract
 {
     public interface IComponentMetadataAdapter
     {
@@ -17,12 +16,12 @@ namespace SsisComponents.Transformations.Adapters.Abstract
         int GetInputColumnIndex(IDTSInputColumn100 inputColumn);
         int GetOutputColumnIndex(IDTSOutputColumn100 destinationOuputColumn);
         void RemoveOutputColumnByIndex(int index);
-        IDTSInputColumn100 GetInputColumnByLineageId(int lineageID);
         void CheckAllInputColumns(int inputID, params DataType[] restrictToDataTypes);
         IEnumerable<IDTSOutputColumn100> GetOutputColumns();
         void AddNewCustomPropertyToOutputColumn(IDTSOutputColumn100 dtsOutputColumn100, string propertyName, object propertyValue);
         TValue GetCustomPropertyFromOutputColumn<TValue>(IDTSOutputColumn100 outputColumn, string propertyName);
         IEnumerable<IDTSOutputColumn100> GetOutputColumns(int outputID);
         void AddNewCustomPropertyToOutput(int outputID, string propertyName, object propertyValue);
+        IDTSInputColumn100 GetInputColumnByName(string columnName);
     }
 }

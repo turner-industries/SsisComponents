@@ -3,8 +3,8 @@ using System.Linq;
 using Microsoft.SqlServer.Dts.Pipeline;
 using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
-using SsisComponents.Transformations.Components.Abstract;
-using SsisComponents.Transformations.CustomProperties.Concrete;
+using SsisComponents.Base.Components.Abstract;
+using SsisComponents.Base.CustomProperties.Concrete;
 
 namespace SsisComponents.Transformations.Components.Concrete
 {
@@ -59,33 +59,8 @@ namespace SsisComponents.Transformations.Components.Concrete
                 MetadataAdapter.AddNewCustomPropertyToOutputColumn(
                     destinationOuputColumn, 
                     "Source Column",
-                    inputColumn.LineageID);
+                    inputColumn.Name);
             }
-        }
-
-        // Design time.  This event is fired whenever the user changes a column's setting in the "Input Columns" tab
-        // of the component's editor.
-        public override IDTSInputColumn100 SetUsageType(
-            int inputID, 
-            IDTSVirtualInput100 virtualInput, 
-            int lineageID, 
-            DTSUsageType usageType)
-        {
-            ReinitializeMetaData();
-
-            var oldColumn = MetadataAdapter.GetInputColumnByLineageId(lineageID);
-
-            if (usageType == DTSUsageType.UT_IGNORED && oldColumn != null)
-            {
-                var inputIndex = MetadataAdapter.GetInputColumnIndex(oldColumn);
-                if (_sourceToDestinationColumnMaping.ContainsKey(inputIndex))
-                {
-                    MetadataAdapter.RemoveOutputColumnByIndex(_sourceToDestinationColumnMaping[inputIndex]);
-                    _sourceToDestinationColumnMaping.Remove(inputIndex);
-                }
-            }
-
-            return base.SetUsageType(inputID, virtualInput, lineageID, usageType);
         }
 
         // Design and run time.  At design time, this event fires anytime the component's editor is opened,
@@ -117,8 +92,8 @@ namespace SsisComponents.Transformations.Components.Concrete
 
             foreach (var outputColumn in outputColumns)
             {
-                var sourceColumnLineage = MetadataAdapter.GetCustomPropertyFromOutputColumn<int>(outputColumn, "Source Column");
-                var inputColumn = MetadataAdapter.GetInputColumnByLineageId(sourceColumnLineage);
+                var sourceColumnLineage = MetadataAdapter.GetCustomPropertyFromOutputColumn<string>(outputColumn, "Source Column");
+                var inputColumn = MetadataAdapter.GetInputColumnByName(sourceColumnLineage);
                 var inputColumnIndex = MetadataAdapter.GetInputColumnIndex(inputColumn);
 
                 _sourceToDestinationColumnMaping.Add(inputColumnIndex, 
