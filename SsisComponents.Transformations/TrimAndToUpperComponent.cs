@@ -5,6 +5,7 @@ using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
 using SsisComponents.Base.Components.Abstract;
 using SsisComponents.Base.CustomProperties.Concrete;
+using SsisComponents.Base.Adapters.Abstract;
 
 namespace SsisComponents.Transformations.Components.Concrete
 {
@@ -22,25 +23,31 @@ namespace SsisComponents.Transformations.Components.Concrete
         private bool _trim;
         private bool _toUpper;
 
+        public TrimAndToUpperComponent(
+            IComponentMetadataAdapter metadataAdapter,
+            IComComponentAdapter comComponentAdapter)
+            : base(metadataAdapter, comComponentAdapter)
+        { }
+
         public override void ProvideComponentProperties()
         {
             base.ProvideComponentProperties();
 
             MetadataAdapter.AddNewCustomDesignTimeProperty(
-                new BooleanCustomPropertyBuilder(
-                    "Trim",
-                    "Indicates whether or not to Trim() the column data",
-                    DTSPersistState.PS_DEFAULT, 
-                    true)
-                );
+                new BooleanCustomPropertyBuilder(true)
+                {
+                    PropertyName = "Trim",
+                    PropertyDescription = "Indicates whether or not to Trim() the column data",
+                    PersistState = DTSPersistState.PS_DEFAULT
+                });
 
             MetadataAdapter.AddNewCustomDesignTimeProperty(
-                new BooleanCustomPropertyBuilder(
-                    "Uppercase",
-                    "Indicates whether or not ToUpper() should be performed on the column data",
-                    DTSPersistState.PS_DEFAULT,
-                    true)
-                );
+                new BooleanCustomPropertyBuilder(true)
+                {
+                    PropertyName = "Uppercase",
+                    PropertyDescription = "Indicates whether or not ToUpper() should be performed on the column data",
+                    PersistState = DTSPersistState.PS_DEFAULT
+                });
         }
 
         // Design time.  This event is fired whenever the user attaches a new input to the component.

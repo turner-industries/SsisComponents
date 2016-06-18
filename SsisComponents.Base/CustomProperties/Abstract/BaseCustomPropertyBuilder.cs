@@ -1,33 +1,19 @@
-﻿using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
+﻿using System;
+using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 
 namespace SsisComponents.Base.CustomProperties.Abstract
 {
     public abstract class BaseCustomPropertyBuilder : ICustomPropertyBuilder
     {
-        protected readonly string PropertyName;
-        protected readonly string PropertyDescription;
-        protected readonly DTSPersistState PersistState;
-
-        protected BaseCustomPropertyBuilder(
-            string propertyName,
-            string propertyDescription,
-            DTSPersistState persistState)
-        {
-            PropertyName = propertyName;
-            PropertyDescription = propertyDescription;
-            PersistState = persistState;
-        }
+        public string PropertyName { get; set; }
+        public string PropertyDescription { get; set; }
+        public DTSPersistState PersistState { get; set; }
+        public object Value { get; set; }
 
         public IDTSCustomProperty100 Build(IDTSCustomPropertyCollection100 collection)
         {
-            var property = BuildBasicProperty(collection);
-
-            BuildValue(property);
-
-            return property;
+            return BuildBasicProperty(collection);
         }
-
-        protected abstract void BuildValue(IDTSCustomProperty100 property);
 
         private IDTSCustomProperty100 BuildBasicProperty(IDTSCustomPropertyCollection100 collection)
         {
@@ -35,6 +21,7 @@ namespace SsisComponents.Base.CustomProperties.Abstract
             property.Name = PropertyName;
             property.Description = PropertyDescription;
             property.State = PersistState;
+            property.Value = Value;
 
             return property;
         }

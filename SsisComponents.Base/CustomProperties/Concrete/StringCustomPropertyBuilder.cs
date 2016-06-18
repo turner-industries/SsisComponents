@@ -7,19 +7,9 @@ namespace SsisComponents.Base.CustomProperties.Concrete
     {
         private readonly string _defaultValue;
 
-        public StringCustomPropertyBuilder(
-            string propertyName, 
-            string propertyDescription, 
-            DTSPersistState persistState,
-            string defaultValue) 
-                : base(propertyName, propertyDescription, persistState)
+        public StringCustomPropertyBuilder(string defaultValue) 
         {
-            _defaultValue = defaultValue;
-        }
-
-        protected override void BuildValue(IDTSCustomProperty100 property)
-        {
-            property.Value = _defaultValue;
+            Value = defaultValue;
         }
     }
 }

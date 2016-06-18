@@ -15,13 +15,10 @@ namespace SsisComponents.Base.Adapters.Abstract
         IEnumerable<IDTSInputColumn100> GetInputColumnsByInputId(int inputID);
         int GetInputColumnIndex(IDTSInputColumn100 inputColumn);
         int GetOutputColumnIndex(IDTSOutputColumn100 destinationOuputColumn);
-        void RemoveOutputColumnByIndex(int index);
         void CheckAllInputColumns(int inputID, params DataType[] restrictToDataTypes);
         IEnumerable<IDTSOutputColumn100> GetOutputColumns();
         void AddNewCustomPropertyToOutputColumn(IDTSOutputColumn100 dtsOutputColumn100, string propertyName, object propertyValue);
         TValue GetCustomPropertyFromOutputColumn<TValue>(IDTSOutputColumn100 outputColumn, string propertyName);
-        IEnumerable<IDTSOutputColumn100> GetOutputColumns(int outputID);
-        void AddNewCustomPropertyToOutput(int outputID, string propertyName, object propertyValue);
         IDTSInputColumn100 GetInputColumnByName(string columnName);
     }
 }
