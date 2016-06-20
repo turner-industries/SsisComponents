@@ -58,6 +58,7 @@
     <Compile Include="Adapters\Abstract\IComponentMetadataAdapter.cs" />
     <Compile Include="Adapters\Concrete\ComponentMetadataAdapter.cs" />
     <Compile Include="Components\Abstract\BasePipelineComponent.cs" />
+    <Compile Include="Adapters\Abstract\IComComponentAdapter.cs" />
     <Compile Include="CustomProperties\Abstract\BaseCustomPropertyBuilder.cs" />
     <Compile Include="CustomProperties\Abstract\ICustomPropertyBuilder.cs" />
     <Compile Include="CustomProperties\Concrete\BooleanCustomPropertyBuilder.cs" />

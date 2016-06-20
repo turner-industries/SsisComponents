@@ -92,14 +92,6 @@ namespace SsisComponents.Base.Adapters.Concrete
                 .FindObjectIndexByID(outputColumn.ID);
         }
 
-        public void RemoveOutputColumnByIndex(int index)
-        {
-            _componentMetaData
-                .OutputCollection[0]
-                .OutputColumnCollection
-                .RemoveObjectByIndex(index);
-        }
-
         public void CheckAllInputColumns(int inputID, params DataType[] restrictToDataTypes)
         {
             var input = GetInputByInputID(inputID)
@@ -144,26 +136,6 @@ namespace SsisComponents.Base.Adapters.Concrete
                 .Cast<IDTSCustomProperty100>()
                 .Single(p => p.Name.Equals(propertyName))
                 .Value;
-        }
-
-        public IEnumerable<IDTSOutputColumn100> GetOutputColumns(int outputID)
-        {
-            return _componentMetaData
-                .OutputCollection
-                .GetObjectByID(outputID)
-                .OutputColumnCollection
-                .Cast<IDTSOutputColumn100>();
-        }
-
-        public void AddNewCustomPropertyToOutput(int outputID, string propertyName, object propertyValue)
-        {
-            var output = _componentMetaData
-                .OutputCollection
-                .GetObjectByID(outputID);
-
-            var newProperty = output.CustomPropertyCollection.New();
-            newProperty.Name = propertyName;
-            newProperty.Value = propertyValue;
         }
 
         public IDTSInputColumn100 GetInputColumnByName(string columnName)

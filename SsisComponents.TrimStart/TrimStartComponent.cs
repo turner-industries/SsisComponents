@@ -33,13 +33,14 @@ namespace SsisComponents.TrimStart
             base.ProvideComponentProperties();
 
             MetadataAdapter.AddNewCustomDesignTimeProperty(
-                new StringArrayCustomPropertyBuilder(
-                    "Strings to trim",
-                    "List of strings and characters to trim from the front of the column data.  Whitespace is trimmed by " +
+                new StringArrayCustomPropertyBuilder()
+                {
+                    PropertyName = "Strings to trim",
+                    PropertyDescription = "List of strings and characters to trim from the front of the column data.  Whitespace is trimmed by " +
                         "default and will be trimmed between every string in this list.  If a source column is specified in " +
                         "the output properties, it will be trimmed before any of the items in this list.",
-                    DTSPersistState.PS_PERSISTASCDATA)
-                );
+                    PersistState = DTSPersistState.PS_PERSISTASCDATA
+                });
         }
 
         public override IDTSOutputColumn100 InsertOutputColumnAt(int outputID, int outputColumnIndex, string name, string description)

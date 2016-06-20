@@ -8,10 +8,14 @@ namespace SsisComponents.Base.Components.Abstract
     public class BasePipelineComponent : PipelineComponent
     {
         protected IComponentMetadataAdapter MetadataAdapter { get; private set; }
+        protected IComComponentAdapter BaseComponentComAdapter {get; private set; }
 
-        public BasePipelineComponent(IComponentMetadataAdapter metadataAdapter)
+        public BasePipelineComponent(
+            IComponentMetadataAdapter metadataAdapter,
+            IComComponentAdapter comComponentAdapter)
         {
             MetadataAdapter = metadataAdapter;
+            BaseComponentComAdapter = comComponentAdapter;
         }
 
         public BasePipelineComponent()
@@ -21,35 +25,31 @@ namespace SsisComponents.Base.Components.Abstract
 
         public override void ProvideComponentProperties()
         {
-            base.ProvideComponentProperties();
-
-            ReinitializeMetaData();
+            BaseComponentComAdapter.ProvideComponentProperties();
+            BaseComponentComAdapter.ReinitializeMetaData();
         }
 
         public override void PreExecute()
         {
-            base.PreExecute();
-
-            ReinitializeMetaData();
+            BaseComponentComAdapter.PreExecute();
+            BaseComponentComAdapter.ReinitializeMetaData();
         }
 
         public override void OnInputPathAttached(int inputID)
         {
-            base.OnInputPathAttached(inputID);
+            BaseComponentComAdapter.OnInputPathAttached(inputID);
+            BaseComponentComAdapter.ReinitializeMetaData();
+        }
 
-            ReinitializeMetaData();
+        public override void ReinitializeMetaData()
+        {
+            BaseComponentComAdapter.ReinitializeMetaData();
+            MetadataAdapter.Initialize(ComponentMetaData);
         }
 
         protected IDTSInputColumnCollection100 GetInputColumns(IDTSInput100 input = null) => 
             (input ?? ComponentMetaData.InputCollection[0]).InputColumnCollection;
 
         protected IDTSInput100 GetInput() => ComponentMetaData.InputCollection[0];
-
-        public override void ReinitializeMetaData()
-        {
-            base.ReinitializeMetaData();
-
-            MetadataAdapter.Initialize(ComponentMetaData);
-        }
     }
 }

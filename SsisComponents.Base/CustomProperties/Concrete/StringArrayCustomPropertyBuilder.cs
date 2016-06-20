@@ -5,17 +5,9 @@ namespace SsisComponents.Base.CustomProperties.Concrete
 {
     public class StringArrayCustomPropertyBuilder : BaseCustomPropertyBuilder
     {
-        public StringArrayCustomPropertyBuilder(
-            string propertyName,
-            string propertyDescription,
-            DTSPersistState persistState) :
-            base(propertyName, propertyDescription, persistState)
+        public StringArrayCustomPropertyBuilder()
         {
-        }
-
-        protected override void BuildValue(IDTSCustomProperty100 property)
-        {
-            property.Value = new string[0];
+            Value = new string[0];
         }
     }
 }
