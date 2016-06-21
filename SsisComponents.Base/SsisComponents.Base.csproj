@@ -21,7 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -58,7 +58,6 @@
     <Compile Include="Adapters\Abstract\IComponentMetadataAdapter.cs" />
     <Compile Include="Adapters\Concrete\ComponentMetadataAdapter.cs" />
     <Compile Include="Components\Abstract\BasePipelineComponent.cs" />
-    <Compile Include="Adapters\Abstract\IComComponentAdapter.cs" />
     <Compile Include="CustomProperties\Abstract\BaseCustomPropertyBuilder.cs" />
     <Compile Include="CustomProperties\Abstract\ICustomPropertyBuilder.cs" />
     <Compile Include="CustomProperties\Concrete\BooleanCustomPropertyBuilder.cs" />

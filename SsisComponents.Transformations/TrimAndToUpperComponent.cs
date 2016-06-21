@@ -5,9 +5,8 @@ using Microsoft.SqlServer.Dts.Pipeline.Wrapper;
 using Microsoft.SqlServer.Dts.Runtime.Wrapper;
 using SsisComponents.Base.Components.Abstract;
 using SsisComponents.Base.CustomProperties.Concrete;
-using SsisComponents.Base.Adapters.Abstract;
 
-namespace SsisComponents.Transformations.Components.Concrete
+namespace SsisComponents.Transformations
 {
     [DtsPipelineComponent(
        DisplayName = "Trim and ToUpper",
@@ -23,11 +22,8 @@ namespace SsisComponents.Transformations.Components.Concrete
         private bool _trim;
         private bool _toUpper;
 
-        public TrimAndToUpperComponent(
-            IComponentMetadataAdapter metadataAdapter,
-            IComComponentAdapter comComponentAdapter)
-            : base(metadataAdapter, comComponentAdapter)
-        { }
+        // Note: a non-default constructor will cause the component to throw a design-time exception about missing
+        // interfaces or not being registered
 
         public override void ProvideComponentProperties()
         {
