@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2015Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\SsisComponents.Base\SsisComponents.Base.csproj">
+			<Name>SsisComponents.Base</Name>
+			<Project>{70C4D9E2-1D7D-476B-AD12-4FB347F1AFCB}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\SsisComponents.Transformations\SsisComponents.Transformations.csproj">
+			<Name>SsisComponents.Transformations</Name>
+			<Project>{78C6D2B9-4EC4-455B-9D12-8298F8E0151A}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\SsisComponents.TrimStart\SsisComponents.TrimStart.csproj">
+			<Name>SsisComponents.TrimStart</Name>
+			<Project>{B7A08CD1-AFE2-4DD4-8C57-8198412DFF67}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

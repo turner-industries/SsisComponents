@@ -8,14 +8,11 @@ namespace SsisComponents.Base.Components.Abstract
     public class BasePipelineComponent : PipelineComponent
     {
         protected IComponentMetadataAdapter MetadataAdapter { get; private set; }
-        protected IComComponentAdapter BaseComponentComAdapter {get; private set; }
 
         public BasePipelineComponent(
-            IComponentMetadataAdapter metadataAdapter,
-            IComComponentAdapter comComponentAdapter)
+            IComponentMetadataAdapter metadataAdapter)
         {
             MetadataAdapter = metadataAdapter;
-            BaseComponentComAdapter = comComponentAdapter;
         }
 
         public BasePipelineComponent()
@@ -25,25 +22,25 @@ namespace SsisComponents.Base.Components.Abstract
 
         public override void ProvideComponentProperties()
         {
-            BaseComponentComAdapter.ProvideComponentProperties();
-            BaseComponentComAdapter.ReinitializeMetaData();
+            base.ProvideComponentProperties();
+            ReinitializeMetaData();
         }
 
         public override void PreExecute()
         {
-            BaseComponentComAdapter.PreExecute();
-            BaseComponentComAdapter.ReinitializeMetaData();
+            base.PreExecute();
+            ReinitializeMetaData();
         }
 
         public override void OnInputPathAttached(int inputID)
         {
-            BaseComponentComAdapter.OnInputPathAttached(inputID);
-            BaseComponentComAdapter.ReinitializeMetaData();
+            base.OnInputPathAttached(inputID);
+            ReinitializeMetaData();
         }
 
         public override void ReinitializeMetaData()
         {
-            BaseComponentComAdapter.ReinitializeMetaData();
+            base.ReinitializeMetaData();
             MetadataAdapter.Initialize(ComponentMetaData);
         }
 
